@@ -1,0 +1,17 @@
+legacy_path,new_path,status,notes
+/bio,/team,301,in vercel.json
+/bio/:slug,/team/:slug,301,in vercel.json
+/article,/news,301,in vercel.json
+/article/:path*,/news,301,in vercel.json
+/pdf/Agellus-Website-Privacy-Policy.pdf,/privacy,301,in vercel.json
+/pdf/Agellus-Terms-of-Use.pdf,/terms,301,in vercel.json
+/pdf/Agellus-Cookie-Policy.pdf,/cookies,301,in vercel.json
+/util/sitemap_xml,/sitemap.xml,301,in vercel.json
+/not_found,(none),404,do not soft-404 to home
+/about,/about,200,unchanged
+/team,/team,200,unchanged
+/investment-criteria,/investment-criteria,200,unchanged
+/portfolio,/portfolio,200,unchanged
+/news,/news,200,unchanged
+/contact,/contact,200,unchanged
+/,/,200,unchanged

@@ -1,0 +1,10 @@
+# Default technical review for site changes.
+* @agelluscapital/ac-dev
+
+# Infrastructure and release-sensitive configuration.
+/.github/ @agelluscapital/ac-dev
+/next.config.ts @agelluscapital/ac-dev
+/package.json @agelluscapital/ac-dev
+/package-lock.json @agelluscapital/ac-dev
+/proxy.ts @agelluscapital/ac-dev
+/vercel.json @agelluscapital/ac-dev

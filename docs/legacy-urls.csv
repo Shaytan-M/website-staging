@@ -1,0 +1,30 @@
+url,lastmod,notes
+https://www.agellus.com/,2024-10-15,home
+https://www.agellus.com/about,2026-03-23,matches rebuild
+https://www.agellus.com/team,2025-04-15,matches rebuild
+https://www.agellus.com/investment-criteria,2026-02-24,matches rebuild
+https://www.agellus.com/portfolio,2026-03-16,matches rebuild
+https://www.agellus.com/news,2025-04-15,matches rebuild
+https://www.agellus.com/contact,2025-07-09,matches rebuild
+https://www.agellus.com/article,2025-04-15,legacy CMS list; map to /news
+https://www.agellus.com/bio,2026-03-25,legacy bios index; map to /team
+https://www.agellus.com/not_found,2026-06-16,CMS 404 template; do not 301 to home
+https://www.agellus.com/bio/jeff-aiello,2024-02-21,
+https://www.agellus.com/bio/joe-amadio,2025-11-04,
+https://www.agellus.com/bio/tim-dubis,2025-11-04,
+https://www.agellus.com/bio/josh-kantor,2026-03-25,
+https://www.agellus.com/bio/becky-lopez,2025-11-21,
+https://www.agellus.com/bio/dominic-lupo,2025-04-01,
+https://www.agellus.com/bio/slater-nalen,2024-10-14,
+https://www.agellus.com/bio/barclay-nihill,2024-09-09,
+https://www.agellus.com/bio/myles-opdahl,2024-04-22,
+https://www.agellus.com/bio/jill-pfeffer,2025-04-01,
+https://www.agellus.com/bio/justin-smith,2024-02-21,
+https://www.agellus.com/bio/luke-sutterer,2025-07-29,
+https://www.agellus.com/bio/beau-thomas,2024-04-24,
+https://www.agellus.com/pdf/Agellus-Website-Privacy-Policy.pdf,,live footer
+https://www.agellus.com/pdf/Agellus-Terms-of-Use.pdf,,live footer
+https://www.agellus.com/pdf/Agellus-Cookie-Policy.pdf,,live footer
+https://www.agellus.com/util/sitemap_xml?SITE_ID=684,,legacy sitemap
+https://www.agellus.com/robots.txt,,legacy 404
+https://www.agellus.com/sitemap.xml,,legacy 404

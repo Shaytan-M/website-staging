@@ -1,0 +1,46 @@
+{
+  "framework": "nextjs",
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "Strict-Transport-Security",
+          "value": "max-age=31536000"
+        }
+      ]
+    }
+  ],
+  "redirects": [
+    {
+      "source": "/:path*",
+      "has": [{ "type": "host", "value": "agellus.com" }],
+      "destination": "https://www.agellus.com/:path*",
+      "permanent": true
+    },
+    { "source": "/bio", "destination": "/team", "permanent": true },
+    { "source": "/bio/:slug", "destination": "/team/:slug", "permanent": true },
+    { "source": "/article", "destination": "/news", "permanent": true },
+    { "source": "/article/:path*", "destination": "/news", "permanent": true },
+    {
+      "source": "/pdf/Agellus-Website-Privacy-Policy.pdf",
+      "destination": "/privacy",
+      "permanent": true
+    },
+    {
+      "source": "/pdf/Agellus-Terms-of-Use.pdf",
+      "destination": "/terms",
+      "permanent": true
+    },
+    {
+      "source": "/pdf/Agellus-Cookie-Policy.pdf",
+      "destination": "/cookies",
+      "permanent": true
+    },
+    {
+      "source": "/util/sitemap_xml",
+      "destination": "/sitemap.xml",
+      "permanent": true
+    }
+  ]
+}
