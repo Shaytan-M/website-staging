@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { site } from "@/content/site";
 import { InvestmentDisclaimer } from "@/components/site/InvestmentDisclaimer";
+import { DoNotSellLink } from "./DoNotSellLink";
 
 export function Footer() {
   const year = new Date().getFullYear();
@@ -75,9 +76,7 @@ export function Footer() {
                 Cookie Notice
               </Link>
               <span aria-hidden>|</span>
-              <Link href="/privacy#do-not-sell" className="hover:text-white">
-                Do not sell or share
-              </Link>
+              <DoNotSellLink />
             </p>
           </div>
         </div>

@@ -4,7 +4,7 @@ import { site } from "@/content/site";
 
 export function Stats() {
   return (
-    <Section className="bg-steel py-14 text-white md:py-16">
+    <Section className="bg-[#7295b8] py-14 text-white md:py-16">
       <Container>
         <div className="grid gap-10 md:grid-cols-3 md:gap-6">
           {site.stats.map((stat, i) => (

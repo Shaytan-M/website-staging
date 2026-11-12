@@ -32,6 +32,7 @@ declare global {
   }
 }
 
+
 export function ContactForm() {
   const [status, setStatus] = useState<Status>("idle");
   const [message, setMessage] = useState("");
@@ -40,6 +41,13 @@ export function ContactForm() {
   const [token, setToken] = useState("");
   const widget = useRef<HTMLDivElement>(null);
   const widgetId = useRef<string | null>(null);
+
+  const [resetKey, setResetKey] = useState(0);
+
+  const [messageLength, setMessageLength] = useState(0);
+
+  const messageLimit = CONTACT_FIELD_LIMITS.message;
+  const messageLimitReached = messageLength >= messageLimit;
 
   useEffect(() => {
     if (!siteKey || !widget.current) return;
@@ -95,6 +103,8 @@ export function ContactForm() {
     document.head.appendChild(script);
     return () => script.removeEventListener("load", render);
   }, []);
+
+  
 
   async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -170,6 +180,8 @@ export function ContactForm() {
       setMessage("Thank you. We will be in touch shortly.");
       trackEvent("contact_form_submit", { method: "website_form" });
       form.reset();
+      setMessageLength(0);
+      setResetKey((current) => current + 1);
       window.turnstile?.reset(widgetId.current ?? undefined);
       setToken("");
     } catch {
@@ -185,12 +197,14 @@ export function ContactForm() {
       <div className="grid gap-5 sm:grid-cols-2">
         <Field
           label="First name"
+          key={`firstName-${resetKey}`}
           name="firstName"
           required
           error={fieldErrors.firstName}
         />
         <Field
           label="Last name"
+          key={`lastName-${resetKey}`}
           name="lastName"
           required
           error={fieldErrors.lastName}
@@ -198,6 +212,7 @@ export function ContactForm() {
       </div>
       <Field
         label="Email"
+        key={`email-${resetKey}`}
         name="email"
         type="email"
         required
@@ -206,30 +221,65 @@ export function ContactForm() {
       <Field label="Company" name="company" error={fieldErrors.company} />
       <Field
         label="Phone"
+        key={`phone-${resetKey}`}
         name="phone"
         type="tel"
         error={fieldErrors.phone}
       />
+      
+  <div>
+    <label
+      htmlFor="message"
+      className="mb-1.5 block text-sm font-semibold text-ink"
+    >
+      Message <span className="text-indigo">*</span>
+    </label>
+
+    <textarea
+      id="message"
+      name="message"
+      required
+      rows={5}
+      maxLength={messageLimit}
+      onChange={(e) => setMessageLength(e.currentTarget.value.length)}
+      aria-invalid={Boolean(fieldErrors.message)}
+      aria-describedby={[
+        fieldErrors.message ? "message-error" : null,
+        "message-counter",
+      ]
+        .filter(Boolean)
+        .join(" ")}
+      className={`w-full rounded-md border bg-white px-3 py-2.5 text-sm text-ink outline-none transition focus:border-indigo ${
+        fieldErrors.message || messageLimitReached
+          ? "border-red-600"
+          : "border-slate-500"
+      }`}
+    />
+
+    <div className="mt-1.5 flex items-start justify-between gap-3">
       <div>
-        <label htmlFor="message" className="mb-1.5 block text-sm font-semibold text-ink">
-          Message <span className="text-indigo">*</span>
-        </label>
-        <textarea
-          id="message"
-          name="message"
-          required
-          rows={5}
-          maxLength={CONTACT_FIELD_LIMITS.message}
-          aria-invalid={Boolean(fieldErrors.message)}
-          aria-describedby={fieldErrors.message ? "message-error" : undefined}
-          className="w-full rounded-md border border-line bg-white px-3 py-2.5 text-sm text-ink outline-none transition focus:border-indigo"
-        />
         {fieldErrors.message ? (
-          <p id="message-error" className="mt-1.5 text-sm text-red-700">
+          <p id="message-error" className="text-sm text-red-700">
             {fieldErrors.message}
+          </p>
+        ) : messageLimitReached ? (
+          <p role="status" className="text-sm text-red-700">
+            Maximum of {messageLimit} characters reached.
           </p>
         ) : null}
       </div>
+
+      <span
+        id="message-counter"
+        className={`shrink-0 text-xs ${
+          messageLimitReached ? "text-red-700" : "text-muted"
+        }`}
+      >
+        {messageLength} / {messageLimit}
+      </span>
+    </div>
+  </div>
+
 
       <input
         type="text"
@@ -288,6 +338,7 @@ export function ContactForm() {
   );
 }
 
+
 function Field({
   label,
   name,
@@ -301,29 +352,74 @@ function Field({
   required?: boolean;
   error?: string;
 }) {
+  const [length, setLength] = useState(0);
+  const [phoneValue, setPhoneValue] = useState("");
+
+  const maxLength = CONTACT_FIELD_LIMITS[name];
+  const limitReached = length >= maxLength;
   const errorId = `${name}-error`;
+  const limitId = `${name}-limit`;
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const input = e.currentTarget.value;
+
+    if (name === "phone") {
+      const sanitized = input.replace(/[^0-9+()\s-]/g, "");
+
+      setPhoneValue(sanitized);
+      setLength(sanitized.length);
+      return;
+    }
+
+    setLength(input.length);
+  };
+  
 
   return (
     <div>
-      <label htmlFor={name} className="mb-1.5 block text-sm font-semibold text-ink">
+      <label
+        htmlFor={name}
+        className="mb-1.5 block text-sm font-semibold text-ink"
+      >
         {label}
         {required ? <span className="text-indigo"> *</span> : null}
       </label>
+
       <input
         id={name}
         name={name}
         type={type}
         required={required}
-        maxLength={CONTACT_FIELD_LIMITS[name]}
+        maxLength={maxLength}
+        value={name === "phone" ? phoneValue : undefined}
+        onChange={handleChange}
+        inputMode={name === "phone" ? "tel" : undefined}
         aria-invalid={Boolean(error)}
-        aria-describedby={error ? errorId : undefined}
-        className="w-full rounded-md border border-line bg-white px-3 py-2.5 text-sm text-ink outline-none transition focus:border-indigo"
+        aria-describedby={[
+          error ? errorId : null,
+          limitReached ? limitId : null,
+        ]
+          .filter(Boolean)
+          .join(" ") || undefined}
+        className={`w-full rounded-md border bg-white px-3 py-2.5 text-sm text-ink outline-none transition focus:border-indigo ${
+          error || limitReached ? "border-red-600" : "border-slate-500"
+        }`}
       />
+
       {error ? (
         <p id={errorId} className="mt-1.5 text-sm text-red-700">
           {error}
+        </p>
+      ) : limitReached ? (
+        <p
+          id={limitId}
+          role="status"
+          className="mt-1.5 text-sm text-red-700"
+        >
+          Maximum of {maxLength} characters reached.
         </p>
       ) : null}
     </div>
   );
 }
+

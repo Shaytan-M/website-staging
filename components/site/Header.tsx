@@ -153,7 +153,7 @@ export function Header() {
       <div
         id="mobile-nav"
         className={cn(
-          "fixed inset-0 top-[72px] bg-white transition-[opacity,visibility] lg:hidden",
+          "fixed inset-0 top-[72px] overflow-y-auto bg-white transition-[opacity,visibility] lg:hidden",
           open ? "visible opacity-100" : "invisible opacity-0",
         )}
       >

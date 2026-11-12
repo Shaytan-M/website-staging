@@ -16,9 +16,9 @@ export function CompanyBlock({ company }: { company: PortfolioCompany }) {
           className="max-h-14 w-auto object-contain object-left"
         />
       </div>
-      <h2 className="mt-5 font-display text-xl font-semibold text-ink">
+      <h3 className="mt-5 font-display text-xl font-semibold text-ink">
         {company.name}
-      </h2>
+      </h3>
       <p className="mt-2 text-sm text-muted">
         Investment Date: {company.investmentDate}
       </p>

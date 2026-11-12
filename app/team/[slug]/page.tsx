@@ -18,10 +18,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
   const member = getTeamMember(slug);
   if (!member) return {};
-  const description =
-    member.bio[0].length > 155
-      ? `${member.bio[0].slice(0, 152).trimEnd()}…`
-      : member.bio[0];
+  const description = member.description;
 
   return {
     title: `${member.name}, ${member.title}`,

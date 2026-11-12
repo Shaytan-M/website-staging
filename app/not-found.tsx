@@ -4,7 +4,7 @@ import { Container, Section } from "@/components/ui/Section";
 
 export default function NotFound() {
   return (
-    <Section className="bg-indigo-deep text-white pt-32 md:pt-40">
+    <Section className="flex-1 flex flex-col justify-center bg-indigo-deep text-white pt-32 md:pt-40">
       <Container className="max-w-2xl">
         <p className="text-xs font-semibold uppercase tracking-[0.22em] text-steel">
           404

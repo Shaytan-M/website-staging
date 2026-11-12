@@ -19,7 +19,6 @@
       "permanent": true
     },
     { "source": "/bio", "destination": "/team", "permanent": true },
-    { "source": "/bio/:slug", "destination": "/team/:slug", "permanent": true },
     { "source": "/article", "destination": "/news", "permanent": true },
     { "source": "/article/:path*", "destination": "/news", "permanent": true },
     {

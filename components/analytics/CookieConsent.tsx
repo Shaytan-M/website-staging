@@ -52,7 +52,7 @@ export function CookieConsent() {
       role="dialog"
       aria-labelledby="cookie-consent-title"
       aria-describedby="cookie-consent-desc"
-      className="fixed inset-x-0 bottom-0 z-[60] border-t border-line bg-white/95 p-4 shadow-[0_-8px_30px_rgba(7,2,60,0.12)] backdrop-blur md:p-5"
+      className="sticky inset-x-0 bottom-0 z-[60] border-t border-line bg-white/95 p-4 shadow-[0_-8px_30px_rgba(7,2,60,0.12)] backdrop-blur md:p-5"
     >
       <div className="mx-auto flex max-w-[1280px] flex-col gap-4 md:flex-row md:items-center md:justify-between">
         <div className="max-w-3xl">

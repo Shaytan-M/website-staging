@@ -4,6 +4,7 @@ export function JsonLd() {
   const organization = {
     "@context": "https://schema.org",
     "@type": "Organization",
+    "@id": `${site.url}/#organization`,
     name: site.name,
     url: site.url,
     logo: `${site.url}${site.logoPng}`,
@@ -24,13 +25,12 @@ export function JsonLd() {
   const website = {
     "@context": "https://schema.org",
     "@type": "WebSite",
+    "@id": `${site.url}/#website`,
     name: site.name,
     url: site.url,
     description: site.description,
     publisher: {
-      "@type": "Organization",
-      name: site.name,
-      url: site.url,
+      "@id": organization["@id"],
     },
   };
 

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { Container, Section } from "@/components/ui/Section";
 import { counselNotice, legalPages } from "@/content/legal";
+import { ResetCookieConsentButton } from "./ResetCookieConsentButton";
 
 type LegalKey = keyof typeof legalPages;
 
@@ -44,6 +45,9 @@ export function LegalDocument({ pageKey }: { pageKey: LegalKey }) {
         <div className="mt-10 space-y-8">
           {page.sections.map((section) => (
             <section
+              className={
+                section.heading === "Do not sell or share" ? "scroll-mt-24" : undefined
+              }
               key={section.heading}
               id={
                 section.heading === "Do not sell or share"
@@ -59,6 +63,9 @@ export function LegalDocument({ pageKey }: { pageKey: LegalKey }) {
                   {p}
                 </p>
               ))}
+              {pageKey === "privacy" && section.heading === "Do not sell or share" && (
+                <ResetCookieConsentButton />
+              )}
             </section>
           ))}
         </div>

@@ -27,6 +27,26 @@ const securityHeaders = [
 ];
 
 const nextConfig: NextConfig = {
+  skipTrailingSlashRedirect: true,
+  async redirects() {
+    return [
+      {
+        source: "/bio/:slug",
+        destination: "/team/:slug",
+        permanent: true,
+      },
+      {
+        source: "/:path+/",
+        destination: "/:path+",
+        permanent: true,
+      },
+      {
+        source: "/documents/FG/agellus/about/652199_Agellus_Tearsheet_-_July_2026.pdf",
+        destination: "/pdf/tearsheet.pdf",
+        permanent: true,
+      },
+    ];
+  },
   async headers() {
     return [
       {
